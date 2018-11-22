@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0">           
+	<xsd:element name="perros">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="perro" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="nombre" type="xsd:string" />
+							<xsd:element name="raza" type="xsd:string" />
+							<xsd:element name="sexo" type="xsd:string" />
+							<xsd:element name="propietario" type="xsd:string" />
+							<xsd:element name="deporte" type="xsd:string" />
+							<xsd:element name="grado" type="xsd:string" />
+							<xsd:element name="club" type="xsd:string" />
+						</xsd:sequence>
+						<xsd:attribute name="chip" type="xsd:string"/>
+						<xsd:attribute name="afijo" type="xsd:string"/>
+						<xsd:attribute name="nacimiento" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
