@@ -5,6 +5,7 @@
  */
 package codigo;
 
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,9 +24,12 @@ public class Ventana extends javax.swing.JFrame {
     
     File fichero;
     
+    Font font=new Font("MV Boli",Font.PLAIN,16);
     
     public Ventana() {
         initComponents();
+        jTextArea1.setEditable(false);
+        jTextArea1.setFont(font);
     }
 
     //Método que nos permite abrir un jFileChooser para abrir un archivo.
@@ -67,7 +71,6 @@ public class Ventana extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -91,6 +94,8 @@ public class Ventana extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -119,12 +124,11 @@ public class Ventana extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Ejecutar");
 
         jTextField2.setBackground(new java.awt.Color(0, 102, 153));
         jTextField2.setForeground(new java.awt.Color(0, 102, 153));
-
-        jTextField3.setText("jTextField3");
 
         jTextField4.setText("jTextField4");
 
@@ -192,7 +196,25 @@ public class Ventana extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Sexo");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Insertar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Número de Chip;");
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setText("Buscar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton3MousePressed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,10 +322,12 @@ public class Ventana extends javax.swing.JFrame {
                                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(53, 53, 53)
-                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGap(31, 31, 31)
+                                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(33, 33, 33)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(229, 229, 229)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -337,11 +361,13 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(15, 15, 15)
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,10 +435,33 @@ public class Ventana extends javax.swing.JFrame {
         
         if(temp==0){
           System.out.print("se ha abierto el fichero");
+          //En caso que se haya abierto correctamente el fichero, ejecutamos el método recorrerSax para parsear
+          //el contenido del fichero a través del manejador y lo guardamos en una variable.
+          String contenido=gesSax.recorrerSAX(gesSax.ficheroXML, gesSax.manejador, gesSax.parser);
+          //En el jTextArea asignamos el contenido de la variable (contenido) y lo muestra.
+          jTextArea1.setText(contenido);
         }else if(temp==-1){
           System.out.print("No se ha podido abrir el fichero");
         }
     }//GEN-LAST:event_jMenuItem1MousePressed
+
+    private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
+        gesJax.abrirJAXB(fichero);
+    }//GEN-LAST:event_jButton3MousePressed
+
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        //File ficheroTemp=dialogoSeleccion();
+        //Guardamos el valor que nos devuelve el método abrirDom en esta variable int
+        int temp=gesDom.abrirDom(fichero);
+        String datos="";
+        //Si el método abrirDom nos devuelve 0, procesamos el contenido del árbol y lo mostramos.
+        if(temp==0){
+          datos=gesDom.recorrerDom();
+          jTextArea1.setText(datos);
+        }else if(temp==-1){
+          jTextArea1.setText("No se puede mostrar el contenido del árbol");
+        }
+    }//GEN-LAST:event_jButton2MousePressed
 
     /**
      * @param args the command line arguments
@@ -452,8 +501,10 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -484,7 +535,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
