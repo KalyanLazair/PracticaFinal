@@ -450,12 +450,24 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MousePressed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
-        //File ficheroTemp=dialogoSeleccion();
+        //Asignamos valor a las variables que vamos a utilizar
+        String chip=jTextField12.getText();
+        String afijo=jTextField7.getText();
+        String nacimiento=jTextField8.getText();
+        String nombre=jTextField9.getText();
+        String raza=jTextField10.getText();
+        String sexo=jTextField13.getText();
+        String propietario=jTextField14.getText();
+        String deporte=jTextField6.getText();
+        String grado=jTextField15.getText();
+        String club=jTextField16.getText();
         //Guardamos el valor que nos devuelve el método abrirDom en esta variable int
         int temp=gesDom.abrirDom(fichero);
         String datos="";
-        //Si el método abrirDom nos devuelve 0, procesamos el contenido del árbol y lo mostramos.
+         //Si el método abrirDom nos devuelve 0, procesamos el contenido del árbol y lo mostramos.
         if(temp==0){
+            gesDom.addDom(chip, afijo,  nacimiento,  nombre,  raza, 
+             sexo,  propietario,  deporte,  grado,  club);
           datos=gesDom.recorrerDom();
           jTextArea1.setText(datos);
         }else if(temp==-1){

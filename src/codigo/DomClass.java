@@ -115,43 +115,67 @@ public class DomClass {
     
     public int addDom(String chip, String afijo, String nacimiento, String nombre, String raza, 
             String sexo, String propietario, String deporte, String grado, String club){
+        try{
+             //Vamos a crear un nodo de tipo elemento con el nombre de 'nombre' (<nombre>)
+            Node pNombre=doc.createElement("nombre");
+            //Creamos un nodo tipo texto con el nombre del perro. Le pasamos como parámetro lo que haya escrito el usuario
+            //en el textfield.
+            Node pNombre_texto=doc.createTextNode(nombre);
+            //Añadimos el nodo texto que acabamos de crear al nodo nombre, como hijo del elemento nombre.
+            pNombre.appendChild(pNombre_texto);
+            //Este mismo proceso lo hacemos con todos los demás nodos tipo elemento.
+            //Elemento tipo raza.
+            Node pRaza=doc.createElement("raza");
+            Node pRaza_texto=doc.createTextNode(raza);
+            pRaza.appendChild(pRaza_texto);
+            //Elemento tipo sexo.
+            Node pSexo=doc.createElement("sexo");
+            Node pSexo_texto=doc.createTextNode(sexo);
+            pSexo.appendChild(pSexo_texto);
+            //Elemento tipo propietario.
+            Node pProp=doc.createElement("propietario");
+            Node pProp_texto=doc.createTextNode(propietario);
+            pProp.appendChild(pProp_texto);
+            //Elemento tipo deporte
+            Node pDeporte=doc.createElement("deporte");
+            Node pDeporte_texto=doc.createTextNode(deporte);
+            pDeporte.appendChild(pDeporte_texto);
+            //Elemento tipo grado
+            Node pGrado=doc.createElement("grado");
+            Node pGrado_texto=doc.createTextNode(grado);
+            pGrado.appendChild(pGrado_texto);
+            //Elemento tipo club
+            Node pClub=doc.createElement("club");
+            Node pClub_texto=doc.createTextNode(club);
+            pClub.appendChild(pClub_texto);
         
-        //Vamos a crear un nodo de tipo elemento con el nombre de 'nombre' (<nombre>)
-        Node pNombre=doc.createElement("nombre");
-        //Creamos un nodo tipo texto con el nombre del perro. Le pasamos como parámetro lo que haya escrito el usuario
-        //en el textfield.
-        Node pNombre_texto=doc.createTextNode(nombre);
-        //Añadimos el nodo texto que acabamos de crear al nodo nombre, como hijo del elemento nombre.
-        pNombre.appendChild(pNombre_texto);
-        //Este mismo proceso lo hacemos con todos los demás nodos tipo elemento.
-        //Elemento tipo raza.
-        Node pRaza=doc.createElement("raza");
-        Node pRaza_texto=doc.createTextNode(raza);
-        pRaza.appendChild(pRaza_texto);
-        //Elemento tipo sexo.
-        Node pSexo=doc.createElement("sexo");
-        Node pSexo_texto=doc.createTextNode(sexo);
-        pSexo.appendChild(pSexo_texto);
-        //Elemento tipo propietario.
-        Node pProp=doc.createElement("propietario");
-        Node pProp_texto=doc.createTextNode(propietario);
-        pProp.appendChild(pProp_texto);
-        //Elemento tipo deporte
-        Node pDeporte=doc.createElement("deporte");
-        Node pDeporte_texto=doc.createTextNode(deporte);
-        pDeporte.appendChild(pDeporte_texto);
-        //Elemento tipo grado
-        Node pGrado=doc.createElement("grado");
-        Node pGrado_texto=doc.createTextNode(grado);
-        pGrado.appendChild(pGrado_texto);
-        //Elemento tipo club
-        Node pClub=doc.createElement("club");
-        Node pClub_texto=doc.createTextNode(club);
-        pClub.appendChild(pClub_texto);
+            //Creamos un nodo de tipo perro.
+            Node pPerro=doc.createElement("perro");
         
+            //Al nuevo nodo le añadimos los atributos.
+            ((Element)pPerro).setAttribute("chip", chip);
+            ((Element)pPerro).setAttribute("afijo", afijo);
+            ((Element)pPerro).setAttribute("nacimiento", nacimiento);
         
+            //Se añaden al nodo perro el resto de nodos tipo elemento que hemos creado antes. 
+            pPerro.appendChild(pNombre);
+            pPerro.appendChild(pRaza);
+            pPerro.appendChild(pSexo);
+            pPerro.appendChild(pProp);
+            pPerro.appendChild(pDeporte);
+            pPerro.appendChild(pGrado);
+            pPerro.appendChild(pClub);
         
-        return 0;
+            //Obtenemos el primer nodo del documento y le añadimos como hijos el nodo perro que ya
+            //tiene todos sus nodos hijos y atributos creados y añadidos.
+            Node raiz= doc.getChildNodes().item(0);
+            raiz.appendChild(pPerro);
+            
+            return 0;
+        }catch(Exception e){
+            e.printStackTrace();
+            return -1;
+        }
     
     }
     
