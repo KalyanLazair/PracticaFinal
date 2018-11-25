@@ -20,7 +20,6 @@ public class Ventana extends javax.swing.JFrame {
     DomClass gesDom= new DomClass();
     JaxClass gesJax= new JaxClass();
     SaxClass gesSax= new SaxClass();
-    XpathClass gesPath= new XpathClass();
     
     File fichero;
     
@@ -30,6 +29,13 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
         jTextArea1.setEditable(false);
         jTextArea1.setFont(font);
+        //Esta parte nos permite añadir los radiobuttons a un button group para que sólo se seleccione uno por vez
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        buttonGroup1.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton4);
+        buttonGroup1.add(jRadioButton5);
+        buttonGroup1.add(jRadioButton7);
     }
 
     //Método que nos permite abrir un jFileChooser para abrir un archivo.
@@ -59,6 +65,7 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -66,7 +73,6 @@ public class Ventana extends javax.swing.JFrame {
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
         jRadioButton7 = new javax.swing.JRadioButton();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -96,6 +102,7 @@ public class Ventana extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jTextField3 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -108,29 +115,35 @@ public class Ventana extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jRadioButton1.setText("jRadioButton1");
+        jRadioButton1.setText("Todos los Registros");
 
-        jRadioButton2.setText("jRadioButton2");
+        jRadioButton2.setText("Afijos");
 
-        jRadioButton3.setText("jRadioButton3");
+        jRadioButton3.setText("Razas");
 
-        jRadioButton4.setText("jRadioButton4");
+        jRadioButton4.setText("Deportes");
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
 
-        jRadioButton5.setText("jRadioButton5");
+        jRadioButton5.setText("Selección por Club");
 
-        jRadioButton6.setText("jRadioButton6");
+        jRadioButton7.setText("Selección por Grado");
 
-        jRadioButton7.setText("jRadioButton7");
-
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("Grado(Brevet/1/2/3)");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Ejecutar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
 
         jTextField2.setBackground(new java.awt.Color(0, 102, 153));
         jTextField2.setForeground(new java.awt.Color(0, 102, 153));
-
-        jTextField4.setText("jTextField4");
 
         jTextField5.setBackground(new java.awt.Color(0, 102, 153));
         jTextField5.setText("jTextField5");
@@ -138,26 +151,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Chip");
-
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
-
-        jTextField9.setText("jTextField9");
-
-        jTextField10.setText("jTextField10");
-
-        jTextField12.setText("jTextField6");
-
-        jTextField13.setText("jTextField6");
-
-        jTextField14.setText("jTextField6");
-
-        jTextField15.setText("jTextField6");
-
-        jTextField16.setText("jTextField6");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -215,6 +208,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton3MousePressed(evt);
             }
         });
+
+        jTextField3.setText("Nombre Club");
 
         jMenu1.setText("File");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,26 +295,6 @@ public class Ventana extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(54, 54, 54)
-                                                .addComponent(jRadioButton1)
-                                                .addGap(103, 103, 103)
-                                                .addComponent(jRadioButton2))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(54, 54, 54)
-                                                .addComponent(jRadioButton3)
-                                                .addGap(103, 103, 103)
-                                                .addComponent(jRadioButton4))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(54, 54, 54)
-                                                .addComponent(jRadioButton5)
-                                                .addGap(103, 103, 103)
-                                                .addComponent(jRadioButton6))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(54, 54, 54)
-                                                .addComponent(jRadioButton7)
-                                                .addGap(103, 103, 103)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(31, 31, 31)
@@ -327,10 +302,26 @@ public class Ventana extends javax.swing.JFrame {
                                                 .addGap(33, 33, 33)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(229, 229, 229)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(54, 54, 54)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jRadioButton3)
+                                                    .addComponent(jRadioButton1)
+                                                    .addComponent(jRadioButton5)
+                                                    .addComponent(jRadioButton7))
+                                                .addGap(75, 75, 75)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jRadioButton4)
+                                                    .addComponent(jRadioButton2)
+                                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(229, 229, 229)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -338,23 +329,27 @@ public class Ventana extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jRadioButton2)
+                            .addComponent(jRadioButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jRadioButton3)
                             .addComponent(jRadioButton4))
-                        .addGap(3, 3, 3)
+                        .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton5)
-                            .addComponent(jRadioButton6))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton7)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
@@ -446,7 +441,27 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1MousePressed
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
-        gesJax.abrirJAXB(fichero);
+        gesJax.abrirJAXB(fichero); //Abrimos el fichero usando JaxB para poder trabajar con él
+        String entrada=jTextField4.getText(); //Obtenemos el nº de chip que le vamos a pasar como entrada
+        String[] temp=new String[10]; //Declaramos un array de strings que nos va a servir para cargar el contenido.
+        temp=gesJax.recorrerJaxB(entrada); //Obtenemos el array que nos devuelve recorrerJaxB.
+        
+        //Vamos a sacar los datos a través de los textfields.
+        jTextField12.setText(temp[0]);
+        jTextField7.setText(temp[1]);
+        jTextField8.setText(temp[2]);
+        jTextField9.setText(temp[3]);
+        jTextField10.setText(temp[4]);
+        jTextField13.setText(temp[5]);
+        jTextField14.setText(temp[6]);
+        jTextField6.setText(temp[7]);
+        jTextField15.setText(temp[8]);
+        jTextField16.setText(temp[9]);
+        
+        
+        for(int i=0;i<temp.length;i++){
+          System.out.println(temp[i]);
+        }
     }//GEN-LAST:event_jButton3MousePressed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
@@ -474,6 +489,42 @@ public class Ventana extends javax.swing.JFrame {
           jTextArea1.setText("No se puede mostrar el contenido del árbol");
         }
     }//GEN-LAST:event_jButton2MousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        String consulta=""; //Aquí vamos a guardar el parámetro de entrada que le vamos a pasar.
+        String seleccionClub=jTextField3.getText();
+        String seleccionGrado=jTextField1.getText();
+        int temp=gesDom.abrirDom(fichero);
+        //Creamos una estructura con el árbol DOM y, si se crea correctamente, ejecutamos el XPath
+        if(temp==0){
+           //A través de los ifs seleccionamos lo que ocurre dependiendo del botón que esté seleccionado.
+           if(jRadioButton1.isSelected()){
+              consulta="/perros/perro"; //Damos un valor a la variable consulta
+              jTextArea1.setText(gesDom.ejecutaXPATH(consulta)); //Se ejecuta el método del XPath y aparece en el textArea     
+           }else if(jRadioButton2.isSelected()){
+              consulta="/perros/perro/@afijo";
+              jTextArea1.setText(gesDom.ejecutaXPATH(consulta));
+           }else if(jRadioButton3.isSelected()){
+              consulta="/perros/perro/raza";
+              jTextArea1.setText(gesDom.ejecutaXPATH(consulta));
+           }else if(jRadioButton4.isSelected()){
+              consulta="/perros/perro/deporte";
+              jTextArea1.setText(gesDom.ejecutaXPATH(consulta));
+           }else if(jRadioButton5.isSelected()){
+              consulta="/perros/perro[./club='"+seleccionClub+"']"; //Obtenemos el valor escrito en el textfield y
+              jTextArea1.setText(gesDom.ejecutaXPATH(consulta));    //se lo asignamos al string que asignamos como valor
+           }else if(jRadioButton7.isSelected()){                    //a la variable consulta.
+              consulta="/perros/perro[./grado='"+seleccionGrado+"']";
+              jTextArea1.setText(gesDom.ejecutaXPATH(consulta));
+           }
+        }else if(temp==-1){
+           jTextArea1.setText("No se puede mostrar el contenido del árbol");
+        }
+    }//GEN-LAST:event_jButton1MousePressed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -511,6 +562,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -535,7 +587,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
@@ -547,6 +598,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;

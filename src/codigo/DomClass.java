@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+import javax.xml.xpath.*;
 /**
  *
  * @author Marta
@@ -178,6 +179,65 @@ public class DomClass {
         }
     
     }
+    
+    //Búsqueda de datos específicos con XPATH. Vamos a utilizar los métodos del árbol DOM.
+    
+    public String ejecutaXPATH(String consulta){
+           String datos_nodo[]=null;
+           String salida="";
+           Node node;
+           
+           try{
+               //Creamos un objeto XPATH.
+               XPath path=XPathFactory.newInstance().newXPath();
+               //Creamos un XPATHEXPRESSION con la consulta deseada. La consulta se la vamos a pasar como parámetro
+               //de entrada a través de los radiobuttons.
+               XPathExpression exp=path.compile(consulta);
+               //Ejecuta la consulta sobre el DOM y devuelve el resultado en una lista de nodos que hay que procesar.
+               Object result=exp.evaluate(doc, XPathConstants.NODESET);
+               NodeList lista=(NodeList)result;
+               //Recorremos la lista con un bucle for para sacar los resultados.
+               for(int i=0;i<lista.getLength(); i++){
+                   node=lista.item(i); //Analizamos el objeto en la lista en la posición i.
+                   //En caso de que el nodo sea de tipo elemento y el nombre del elemento sea perro, ejecutamos
+                   //el mismo código con el que procesábamos los perros para que nos dé todos los resultados.
+                   if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName()=="perro"){
+                      datos_nodo=procesarPerros(node);
+                      
+                       //En salida guardamos el valor del array datos_nodo ya procesado
+                        salida=salida + "\n" + "Chip; " + datos_nodo[1];
+                         salida=salida + "\n" + "Afijo; " + datos_nodo[0];
+                          salida=salida + "\n" + "Nacimiento; " + datos_nodo[2];
+                           salida=salida + "\n" + "Nombre; " + datos_nodo[3];
+                            salida=salida + "\n" + "Raza; " + datos_nodo[4];
+                             salida=salida + "\n" + "Sexo; " + datos_nodo[5];
+                              salida=salida + "\n" + "Propietario; " + datos_nodo[6];
+                               salida=salida + "\n" + "Deporte; " + datos_nodo[7];
+                                salida=salida + "\n" + "Grado; " + datos_nodo[8];
+                                 salida=salida + "\n" + "Club; " + datos_nodo[9];
+                                  salida=salida + "\n" + "---------------------------";                                   
+                   }else if(node.getNodeType()==Node.ELEMENT_NODE && (node.getNodeName()=="raza" || node.getNodeName()=="sexo"
+                           || node.getNodeName()=="deporte" || node.getNodeName()=="grado" || node.getNodeName()=="club")){
+                       //Procedemos a analizar los nodos tipo elemento hijos de perro.
+                       salida=salida + "\n" + lista.item(i).getChildNodes().item(0).getNodeValue();
+                   }else if(node.getNodeType()==Node.ATTRIBUTE_NODE && (node.getNodeName()=="afijo" || node.getNodeName()=="nacimiento")){
+                       //Obtenemos los atributos
+                       salida=salida + "\n" + lista.item(i).getChildNodes().item(0).getNodeValue();
+                   }
+               
+               }
+           
+           
+           }catch(Exception ex){
+              salida="Error: " + ex.toString();
+              return salida;
+           }
+           
+           
+           return salida;
+    }
+    
+    
     
 }
 
