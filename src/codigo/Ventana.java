@@ -36,6 +36,8 @@ public class Ventana extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton4);
         buttonGroup1.add(jRadioButton5);
         buttonGroup1.add(jRadioButton7);
+        //El botón de añadir información nueva permanece deshabilitado hasta que lo necesitemos
+        jButton4.setEnabled(false);
     }
 
     //Método que nos permite abrir un jFileChooser para abrir un archivo.
@@ -103,6 +105,8 @@ public class Ventana extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -211,6 +215,17 @@ public class Ventana extends javax.swing.JFrame {
 
         jTextField3.setText("Nombre Club");
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setText("Modificar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton4MousePressed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton5.setText("Guardar");
+
         jMenu1.setText("File");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -285,7 +300,10 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +380,7 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,14 +412,18 @@ public class Ventana extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
@@ -457,11 +479,11 @@ public class Ventana extends javax.swing.JFrame {
         jTextField6.setText(temp[7]);
         jTextField15.setText(temp[8]);
         jTextField16.setText(temp[9]);
-        
-        
-        for(int i=0;i<temp.length;i++){
-          System.out.println(temp[i]);
-        }
+        //Deshabilitamos el textfield del chip y el botón de añadir información nuevs
+        jTextField12.setEditable(false);
+        jButton2.setEnabled(false);
+        //Habilitamos el botón de añadir información nueva.
+        jButton4.setEnabled(true);
     }//GEN-LAST:event_jButton3MousePressed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
@@ -526,6 +548,51 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
+    private void jButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MousePressed
+        // Botón que controla las modificaciones
+        //Obtenemos los datos de los textareas.
+        String chip=jTextField12.getText();
+        String afijo=jTextField7.getText();
+        String nacimiento=jTextField8.getText();
+        String nombre=jTextField9.getText();
+        String raza=jTextField10.getText();
+        String sexo=jTextField13.getText();
+        String propietario=jTextField14.getText();
+        String deporte=jTextField6.getText();
+        String grado=jTextField15.getText();
+        String club=jTextField16.getText();
+        
+        int valor=gesJax.editarJaxB(chip, afijo, nacimiento, nombre, raza, sexo, propietario, deporte, grado, club);
+        
+        if(valor==0){
+            String aux[]=gesJax.recorrerJaxB(chip);
+            String salida="";
+           for(int i=0; i<10;i++){
+               salida=salida + "\n" + aux[i];  
+           } 
+           jTextArea1.setText(salida);
+        }else if(valor==-1){
+            jTextArea1.setText("No se ha podido editar");
+        }
+        
+        //Vamos a colocar los valores en 0 y reiniciar.
+        //Limpiamos los textFields.
+        jTextField12.setText("");
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
+        jTextField10.setText("");
+        jTextField13.setText("");
+        jTextField14.setText("");
+        jTextField6.setText("");
+        jTextField15.setText("");
+        jTextField16.setText("");
+        //Reiniciamos los botones y volvemos a permitir la escritura en el textfield de chip.
+        jButton4.setEnabled(false);
+        jTextField12.setEditable(true);
+        jButton2.setEnabled(true);
+    }//GEN-LAST:event_jButton4MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -566,6 +633,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -67,10 +67,41 @@ public class JaxClass {
            }
            
         }
-        
-        
-        
+
         return datos;
+    }
+    
+    public int editarJaxB(String chip, String afijo, String nacimiento, String nombre, String raza, 
+            String sexo, String propietario, String deporte, String grado, String club){
+        String auxiliar="";
+        
+        try{
+            List<Perros.Perro> losPerros=misPerros.getPerro();
+            
+            for(int i=0;i<losPerros.size();i++){
+                auxiliar=losPerros.get(i).getChip();
+                
+                if(auxiliar.equals(chip)){
+                   losPerros.get(i).setAfijo(afijo);
+                   losPerros.get(i).setNacimiento(nacimiento);
+                   losPerros.get(i).setNombre(nombre);
+                   losPerros.get(i).setRaza(raza);
+                   losPerros.get(i).setSexo(sexo);
+                   losPerros.get(i).setPropietario(propietario);
+                   losPerros.get(i).setDeporte(deporte);
+                   losPerros.get(i).setGrado(grado);
+                   losPerros.get(i).setClub(club);
+                }
+            }
+            
+            
+            return 0;
+        
+        }catch(Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    
     }
     
     
