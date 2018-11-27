@@ -25,6 +25,9 @@ public class Ventana extends javax.swing.JFrame {
     
     Font font=new Font("MV Boli",Font.PLAIN,16);
     
+    int valorDeGuardado=0; //nos permite alternar entre uno y otro para llamar al método de guardado correspondiente
+                           //en cada caso.
+    
     public Ventana() {
         initComponents();
         jTextArea1.setEditable(false);
@@ -36,8 +39,10 @@ public class Ventana extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton4);
         buttonGroup1.add(jRadioButton5);
         buttonGroup1.add(jRadioButton7);
-        //El botón de añadir información nueva permanece deshabilitado hasta que lo necesitemos
+        //El botón de modificar información permanece deshabilitado hasta que lo necesitemos
         jButton4.setEnabled(false);
+        //El botón de guardado permanece desabilitado hasta que lo necesitemos.
+        jButton5.setEnabled(false);
     }
 
     //Método que nos permite abrir un jFileChooser para abrir un archivo.
@@ -45,11 +50,11 @@ public class Ventana extends javax.swing.JFrame {
       int rv;
       
       try{
-        JFileChooser fc=new JFileChooser();
+        JFileChooser fc=new JFileChooser(); //Creamos un filechooser
         fc.setMultiSelectionEnabled(false); //Nos impide seleccionar más de un archivo.
-        fc.setDialogType(JFileChooser.OPEN_DIALOG);
-        rv=fc.showOpenDialog(this);
-        
+        fc.setDialogType(JFileChooser.OPEN_DIALOG); //Abrimos el filechooser
+        rv=fc.showOpenDialog(this); //Guardamos el valor del archivo seleccionado en un int
+        //Si el usuario presiona aceptar, entonces obtiene el archivo seleccionado.
         if(rv==JFileChooser.APPROVE_OPTION){
            fichero=fc.getSelectedFile();
           
@@ -59,6 +64,36 @@ public class Ventana extends javax.swing.JFrame {
           return null;
       }         
       return fichero;
+    }
+    
+    //Método para guardar usando el fileChooser
+     private void guardaArchivo(){
+        JFileChooser fc=new JFileChooser(); //Creamos un nuevo objeto fileChooser
+        fc.setMultiSelectionEnabled(false); //Nos impide seleccionar más de un archivo.
+        fc.setDialogType(JFileChooser.OPEN_DIALOG); //Abrimos el fileChooser
+        //En un int guardamos el valor que nos da cuando el usuario elige un archivo
+        int seleccion= fc.showSaveDialog(this);
+        
+        if(seleccion==JFileChooser.APPROVE_OPTION){
+          //Si llego aquí es que el usuario ha pulsado en guardar cuando ha salido el menú de jFileChooser.
+          //Tenemos la opción de guardar el contenido sobre un fichero.
+          File archivo= fc.getSelectedFile(); //Obtiene el archivo seleccionado
+          String nombre= archivo.getName(); //Obtiene el nombre del archivo seleccionado
+          //Necesitamos saber si es un png o un jpg. La extensión, para poder guardarlo y que no de error.
+          //Para ello declaramos un string y tomamos un substring del nombre del archivo, tomando como referencia
+          //el lastIndex del punto +1. Esto es para que no dé error.
+          String extension=nombre.substring(nombre.lastIndexOf('.')+1);
+          //Si la extensión es xml, ejecuta.
+          if(extension.equalsIgnoreCase("xml")){
+                  System.out.println("Ha entrado");
+                  if(valorDeGuardado==1){  //Esto nos va a permitir alternar entre uno u otro dependiendo
+                    gesDom.guardarDomComoFile(archivo);  //de si hemos usado JaxB o Dom para generar los datos.
+                  }else if(valorDeGuardado==2){
+                    gesJax.guardarJaxB(archivo);
+                  }
+          }
+        }
+
     }
     
     
@@ -225,6 +260,11 @@ public class Ventana extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setText("Guardar");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton5MousePressed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -500,16 +540,21 @@ public class Ventana extends javax.swing.JFrame {
         String club=jTextField16.getText();
         //Guardamos el valor que nos devuelve el método abrirDom en esta variable int
         int temp=gesDom.abrirDom(fichero);
-        String datos="";
+        String datos=""; //Nos va a permitir sacar el DOM con la inserción por pantalla para comprobar que se ha hecho correctamente
          //Si el método abrirDom nos devuelve 0, procesamos el contenido del árbol y lo mostramos.
         if(temp==0){
+            //Añadimos un nuevo elemento perro al árbol DOM.
             gesDom.addDom(chip, afijo,  nacimiento,  nombre,  raza, 
              sexo,  propietario,  deporte,  grado,  club);
+          //En el String datos guardamos el contenido del árbol
           datos=gesDom.recorrerDom();
-          jTextArea1.setText(datos);
+          jTextArea1.setText(datos); //Sacamos el contenido del árbol por pantalla
         }else if(temp==-1){
           jTextArea1.setText("No se puede mostrar el contenido del árbol");
         }
+        //Habilitamos el botón de guardado para que se permita su uso una vez insertados los datos.
+        jButton5.setEnabled(true);
+        valorDeGuardado=1; //Nos va a permitir guardar el árbol en un archivo
     }//GEN-LAST:event_jButton2MousePressed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
@@ -542,6 +587,8 @@ public class Ventana extends javax.swing.JFrame {
         }else if(temp==-1){
            jTextArea1.setText("No se puede mostrar el contenido del árbol");
         }
+        //El botón de guardado permanece desabilitado porque sólo vamos a hacer consultas
+        jButton5.setEnabled(false);
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
@@ -549,7 +596,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MousePressed
-        // Botón que controla las modificaciones
+        // Botón que controla las modificaciones con JAXB
         //Obtenemos los datos de los textareas.
         String chip=jTextField12.getText();
         String afijo=jTextField7.getText();
@@ -561,16 +608,16 @@ public class Ventana extends javax.swing.JFrame {
         String deporte=jTextField6.getText();
         String grado=jTextField15.getText();
         String club=jTextField16.getText();
-        
+        //Guardamos el valor int que nos devuelve JaxB en un int.
         int valor=gesJax.editarJaxB(chip, afijo, nacimiento, nombre, raza, sexo, propietario, deporte, grado, club);
-        
+        //Si el valor del int es 0.
         if(valor==0){
-            String aux[]=gesJax.recorrerJaxB(chip);
-            String salida="";
+            String aux[]=gesJax.recorrerJaxB(chip); //Recorre JaxB y nos lo guarda en un array de strings, pasándole el chip como parámetro.
+            String salida=""; //Declaramos un String que nos va a permitir visualizar el contenido por pantalla
            for(int i=0; i<10;i++){
-               salida=salida + "\n" + aux[i];  
-           } 
-           jTextArea1.setText(salida);
+               salida=salida + "\n" + aux[i];  //A través de este bucle for guardamos el contenido del array en 
+           }                                   //un String.
+           jTextArea1.setText(salida); //Sacamos el String por pantalla.
         }else if(valor==-1){
             jTextArea1.setText("No se ha podido editar");
         }
@@ -591,7 +638,15 @@ public class Ventana extends javax.swing.JFrame {
         jButton4.setEnabled(false);
         jTextField12.setEditable(true);
         jButton2.setEnabled(true);
+        //Habilitamos el botón de guardado para que se permita su uso una vez insertados los datos.
+        jButton5.setEnabled(true);
+        //Le damos valor al int para poder proceder al guardado.
+        valorDeGuardado=2;
     }//GEN-LAST:event_jButton4MousePressed
+
+    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
+        guardaArchivo();
+    }//GEN-LAST:event_jButton5MousePressed
 
     /**
      * @param args the command line arguments

@@ -10,6 +10,7 @@ import generated.Perros;
 import java.io.File;
 import java.util.List;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 /**
  *
@@ -70,17 +71,18 @@ public class JaxClass {
 
         return datos;
     }
-    
+    //Método que edita los datos en JaxB. Le pasamos los valores como parámetros de entrada.
     public int editarJaxB(String chip, String afijo, String nacimiento, String nombre, String raza, 
             String sexo, String propietario, String deporte, String grado, String club){
-        String auxiliar="";
+        String auxiliar=""; //Vamos a utilizar el String auxiliar para hacer comprobaciones.
         
         try{
             List<Perros.Perro> losPerros=misPerros.getPerro();
             
             for(int i=0;i<losPerros.size();i++){
-                auxiliar=losPerros.get(i).getChip();
-                
+                auxiliar=losPerros.get(i).getChip(); //Asignamos el valor del objeto chip al String auxiliar.
+                //En caso que sea igual al del parámetro que le hemos pasado como entrada, ejecuta
+                //Modifica todos los datos para facilitar la tarea.
                 if(auxiliar.equals(chip)){
                    losPerros.get(i).setAfijo(afijo);
                    losPerros.get(i).setNacimiento(nacimiento);
@@ -101,6 +103,20 @@ public class JaxClass {
             e.printStackTrace();
             return -1;
         }
+    
+    }
+    //Método para guardar.
+    public void guardarJaxB(File archivo){
+       try{
+          //Creamos un objeto marshaller
+          Marshaller m=contexto.createMarshaller();
+          //Le damos formato para que no nos lo guarde en una linea
+          m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+          //llamamos al marshaller y serializamos el objeto misPerros en el archivo que le pasamos como parámetro
+          m.marshal(misPerros, archivo);
+       }catch(Exception e){
+         e.printStackTrace();
+       }
     
     }
     

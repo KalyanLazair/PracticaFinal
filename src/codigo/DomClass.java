@@ -238,6 +238,32 @@ public class DomClass {
     }
     
     
+   
+    //Método que nos permite guardar el archivo DOM, que nos servirá para guardar los añadidos del DOM
+    
+    public int guardarDomComoFile(File nombreArchivo){
+  
+           try{
+            //especificamos el formato de salida.
+            OutputFormat format= new OutputFormat(doc); 
+            //Especificamos que la salida esté indentada
+            format.setIndenting(true);
+            //Escribe el contenido en el file serializando y lo guarda en el archivo.
+            XMLSerializer serializer=new XMLSerializer(new FileOutputStream(nombreArchivo),format);
+            
+            serializer.serialize(doc);
+            
+            return 0;   
+        
+        }catch(Exception e){
+            System.out.println("No se ha guardado el archivo");
+            return -1;
+        }
+
+          
+        }
+    
+    
     
 }
 
