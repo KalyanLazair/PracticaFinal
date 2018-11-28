@@ -137,11 +137,11 @@ public class SaxClass {
         }
     }
     
-    public String recorrerSAX(File fXML,ManejadorSAX m,SAXParser parser){
+    public String recorrerSAX(){
         try{
             //Parseamos el archivo con el manejador SAX para que nos lance los eventos y nos ejecute el código.
-            parser.parse(fXML,m);
-            return m.cadena_resultado;
+            parser.parse(ficheroXML,manejador);
+            return manejador.cadena_resultado;
         
         }catch(SAXException e){
           e.printStackTrace(); 

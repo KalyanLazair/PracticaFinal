@@ -494,7 +494,7 @@ public class Ventana extends javax.swing.JFrame {
           System.out.print("se ha abierto el fichero");
           //En caso que se haya abierto correctamente el fichero, ejecutamos el método recorrerSax para parsear
           //el contenido del fichero a través del manejador y lo guardamos en una variable.
-          String contenido=gesSax.recorrerSAX(gesSax.ficheroXML, gesSax.manejador, gesSax.parser);
+          String contenido=gesSax.recorrerSAX();
           //En el jTextArea asignamos el contenido de la variable (contenido) y lo muestra.
           jTextArea1.setText(contenido);
         }else if(temp==-1){
