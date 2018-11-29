@@ -21,15 +21,14 @@ public class Ventana extends javax.swing.JFrame {
     JaxClass gesJax= new JaxClass();
     SaxClass gesSax= new SaxClass();
     
-    File fichero;
-    
-    Font font=new Font("MV Boli",Font.PLAIN,16);
+    File fichero;  //Lo declaramos de instancia porque lo vamos a utilizar en múltiples sitios
     
     int valorDeGuardado=0; //nos permite alternar entre uno y otro para llamar al método de guardado correspondiente
                            //en cada caso.
     
     public Ventana() {
         initComponents();
+        Font font=new Font("MV Boli",Font.PLAIN,16);
         jTextArea1.setEditable(false);
         jTextArea1.setFont(font);
         //Esta parte nos permite añadir los radiobuttons a un button group para que sólo se seleccione uno por vez
@@ -89,8 +88,8 @@ public class Ventana extends javax.swing.JFrame {
                   System.out.println("Ha entrado");
                   if(valorDeGuardado==1){  //Esto nos va a permitir alternar entre uno u otro dependiendo
                     gesDom.guardarDomComoFile(archivo);  //de si hemos usado JaxB o Dom para generar los datos.
-                  }else if(valorDeGuardado==2){
-                    gesJax.guardarJaxB(archivo);
+                  }else if(valorDeGuardado==2){       //El valor se asigna cuandos se usa el botón de añadir datos
+                    gesJax.guardarJaxB(archivo);      //o el de editar datos.
                   }
           }
         }
@@ -512,7 +511,7 @@ public class Ventana extends javax.swing.JFrame {
         if(temp==0){
           System.out.print("se ha abierto el fichero");
           //En caso que se haya abierto correctamente el fichero, ejecutamos el método recorrerSax para parsear
-          //el contenido del fichero a través del manejador y lo guardamos en una variable.
+          //el contenido del fichero a través del manejador y lo guardamos en una variable String.
           String contenido=gesSax.recorrerSAX();
           //En el jTextArea asignamos el contenido de la variable (contenido) y lo muestra.
           jTextArea1.setText(contenido);
@@ -523,7 +522,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void botonBuscarJAXBMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarJAXBMousePressed
         gesJax.abrirJAXB(fichero); //Abrimos el fichero usando JaxB para poder trabajar con él
-        String entrada=jTextField4.getText(); //Obtenemos el nº de chip que le vamos a pasar como entrada
+        String entrada=jTextField4.getText(); //Obtenemos el nº de chip que le vamos a pasar como variable de entrada
         String[] temp=new String[10]; //Declaramos un array de strings que nos va a servir para cargar el contenido.
         temp=gesJax.recorrerJaxB(entrada); //Obtenemos el array que nos devuelve recorrerJaxB.
         
@@ -538,15 +537,15 @@ public class Ventana extends javax.swing.JFrame {
         jTextField6.setText(temp[7]);
         jTextField15.setText(temp[8]);
         jTextField16.setText(temp[9]);
-        //Deshabilitamos el textfield del chip y el botón de añadir información nuevs
+        //Deshabilitamos el textfield del chip y el botón de añadir información nueva
         jTextField12.setEditable(false);
         BotonInsertarDOM.setEnabled(false);
-        //Habilitamos el botón de añadir información nueva.
+        //Habilitamos el botón de modificar información.
         botonModificarJAXB.setEnabled(true);
     }//GEN-LAST:event_botonBuscarJAXBMousePressed
 
     private void BotonInsertarDOMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonInsertarDOMMousePressed
-        //Asignamos valor a las variables que vamos a utilizar
+        //Asignamos valor a las variables que vamos a utilizar. Obtenemos ese valor de los textfields.
         String chip=jTextField12.getText();
         String afijo=jTextField7.getText();
         String nacimiento=jTextField8.getText();
@@ -578,7 +577,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void botonEjecutarXPATHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEjecutarXPATHMousePressed
         String consulta=""; //Aquí vamos a guardar el parámetro de entrada que le vamos a pasar.
-        String seleccionClub=jTextField3.getText();
+        String seleccionClub=jTextField3.getText();  //Variable que vamos a usar en la consulta
         int temp=gesDom.abrirDom(fichero);
         //Creamos una estructura con el árbol DOM y, si se crea correctamente, ejecutamos el XPath
         if(temp==0){
@@ -599,8 +598,8 @@ public class Ventana extends javax.swing.JFrame {
               consulta="/perros/perro[./club='"+seleccionClub+"']"; //Obtenemos el valor escrito en el textfield y
               jTextArea1.setText(gesDom.ejecutaXPATH(consulta));    //se lo asignamos al string que asignamos como valor
            }else if(jRadioButton7.isSelected()){                    //a la variable consulta.
-               String cajaSeleccionada=(String) jComboBox1.getSelectedItem(); //Tomamos el valor del jComboBox
-               if(cajaSeleccionada.equals("Brevet")){
+               String cajaSeleccionada=(String) jComboBox1.getSelectedItem(); //Tomamos el valor del jComboBox. Casteamos a
+               if(cajaSeleccionada.equals("Brevet")){                         //String porque getSelectedItem no devuelve String
                  consulta="/perros/perro[./grado='Brevet']";
                }else if(cajaSeleccionada.equals("Grado 1")){
                  consulta="/perros/perro[./grado='1']";  
@@ -649,7 +648,7 @@ public class Ventana extends javax.swing.JFrame {
             jTextArea1.setText("No se ha podido editar");
         }
         
-        //Vamos a colocar los valores en 0 y reiniciar.
+        //Vamos a colocar los valores en 0 y reiniciar. Así el usuario puede hacer inserciones nuevas sin problema
         //Limpiamos los textFields.
         jTextField12.setText("");
         jTextField7.setText("");

@@ -17,7 +17,7 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class SaxClass {
     
-    //Vars de instancia que vamos a manejar
+    //Vars de instancia que vamos a manejar.
     File ficheroXML;
     SAXParser parser;
     ManejadorSAX manejador;
@@ -66,30 +66,30 @@ public class SaxClass {
                ultimoElemento=1;
            }else if(qName.equals("nombre")){
                ultimoElemento=2;
-               cadena_resultado=cadena_resultado + "\nNombre; ";
+               cadena_resultado=cadena_resultado + "Nombre; ";
            }else if(qName.equals("raza")){
                ultimoElemento=3;
-               cadena_resultado=cadena_resultado + "\nRaza; ";
+               cadena_resultado=cadena_resultado + "Raza; ";
            
            }else if(qName.equals("sexo")){
                ultimoElemento=4;
-               cadena_resultado=cadena_resultado + "\nSexo; ";
+               cadena_resultado=cadena_resultado + "Sexo; ";
            
            }else if(qName.equals("propietario")){
                ultimoElemento=5;
-               cadena_resultado=cadena_resultado + "\nPropietario; ";
+               cadena_resultado=cadena_resultado + "Propietario; ";
            
            }else if(qName.equals("deporte")){
                ultimoElemento=6;
-               cadena_resultado=cadena_resultado + "\nDeporte; ";
+               cadena_resultado=cadena_resultado + "Deporte; ";
            
            }else if(qName.equals("grado")){
                ultimoElemento=7;
-               cadena_resultado=cadena_resultado + "\nGrado; ";
+               cadena_resultado=cadena_resultado + "Grado; ";
            
            }else if(qName.equals("club")){
                ultimoElemento=8;
-               cadena_resultado=cadena_resultado + "\nClub; ";
+               cadena_resultado=cadena_resultado + "Club; ";
            
            }
         }

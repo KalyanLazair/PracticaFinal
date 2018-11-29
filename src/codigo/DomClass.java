@@ -39,7 +39,7 @@ public class DomClass {
            //A partir del factory creamos un DocumentBuilder que nos va a permitir cargar en él
            //la estructura del árbol DOM a partir del XML que le hemos pasado.
            DocumentBuilder builder=factory.newDocumentBuilder();
-           //Parseamos el fichero y cargamos sobre el Document la estructura de árbol del DOM.
+           //Parseamos el fichero y generamos un DOM equivalente al fichero XML. El doc apunta al comienzo del árbol.
            doc=builder.parse(fichero);
                   
            return 0;
@@ -50,19 +50,19 @@ public class DomClass {
        }
     }
     
-    //Vamos a crear un método de procesamiento para comprobar que los datos se guardan correctamente.
-    
+    //Vamos a crear un método de procesamiento para comprobar que los datos se guardan correctamente al añadir. Esto
+    //nos devuelve un String que vamos a sacar por pantalla.
     public String recorrerDom(){
-       String datos_nodo[]=null;
+       String datos_nodo[]=null; //Aquí vamos a guardar el contenido del array que nos devuelve procesarPerros
        String salida="";
        Node node;
-       
-       //Obtenemos el primer nodo del Dom.
-       Node raiz=doc.getFirstChild();
-       //Obtenemos una lista de nodos con todos los nodos hijo del nodo raíz.
-       NodeList listaNodos=raiz.getChildNodes();
-       //Procesamos los nodos hijo con un bucle for.
-       for(int i=0; i<listaNodos.getLength(); i++){
+       try{
+         //Obtenemos el primer nodo del Dom.
+         Node raiz=doc.getFirstChild();
+         //Obtenemos una lista de nodos con todos los nodos hijo del nodo raíz. Son los nodos perro.
+         NodeList listaNodos=raiz.getChildNodes();
+         //Procesamos los nodos hijo con un bucle for.
+         for(int i=0; i<listaNodos.getLength(); i++){
            node=listaNodos.item(i); //node adopta el valor del elemento en la lista de nodos posición i. Es un elemento perro.
                                     //Estos son los elementos que vamos a procesar con el método procesarPerros.
            if(node.getNodeType()==Node.ELEMENT_NODE){
@@ -81,7 +81,10 @@ public class DomClass {
                         salida=salida + "\n" + "---------------------------";
            }
        }
-        
+       
+       }catch(Exception e){
+         e.printStackTrace();
+       }  
         return salida;
     }
     
@@ -91,6 +94,7 @@ public class DomClass {
         String datos[]=new String[10]; //Declaramos un array de 10 que es lo que nos va a devolver con el contenido del árbol
         Node ntemp=null; //Declaramos un nodo temporal para poder procesar los nodos hijo de perro.
         int contador=3; //Lo vamos a usar para movernos por las posiciones dentro del array.
+      try{  
         //Dentro del array guardamos los valores de los nodos atributo.
         datos[0]=n.getAttributes().item(0).getNodeValue();
         datos[1]=n.getAttributes().item(1).getNodeValue();
@@ -109,10 +113,14 @@ public class DomClass {
                 contador++;  //El contador nos mueve a través de la posición del array.
             }
         }
+      }catch(Exception e){
+         e.printStackTrace();
+      }
         
         return datos;
     }
     
+    //Método que nos va a añadir un perro nuevo al árbol DOM
     
     public int addDom(String chip, String afijo, String nacimiento, String nombre, String raza, 
             String sexo, String propietario, String deporte, String grado, String club){
